@@ -1,0 +1,60 @@
+{
+  "info": {
+    "_postman_id": "7b9f5f9c-8d4a-4e25-9b7c-carmanual",
+    "name": "CarManual API - MySQL",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {"key": "baseUrl", "value": "http://localhost:8080"},
+    {"key": "planoId", "value": "1"},
+    {"key": "clienteId", "value": "1"},
+    {"key": "mecanicoId", "value": "1"},
+    {"key": "manualId", "value": "1"},
+    {"key": "diagnosticoId", "value": "1"},
+    {"key": "avaliacaoId", "value": "1"}
+  ],
+  "item": [
+    {
+      "name": "01 - Plano",
+      "item": [
+        {"name":"Criar plano","request":{"method":"POST","header":[{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","raw":"{\n  \"nome\": \"Plano Premium\",\n  \"preco\": 49.90\n}"},"url":{"raw":"{{baseUrl}}/plano","host":["{{baseUrl}}"],"path":["plano"]}}},
+        {"name":"Listar planos","request":{"method":"GET","url":{"raw":"{{baseUrl}}/plano","host":["{{baseUrl}}"],"path":["plano"]}}}
+      ]
+    },
+    {
+      "name": "02 - Cliente",
+      "item": [
+        {"name":"Criar cliente","request":{"method":"POST","header":[{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","raw":"{\n  \"nome\": \"João da Silva\",\n  \"email\": \"joao@email.com\",\n  \"telefone\": \"48999999999\"\n}"},"url":{"raw":"{{baseUrl}}/cliente?idPlan={{planoId}}","host":["{{baseUrl}}"],"path":["cliente"],"query":[{"key":"idPlan","value":"{{planoId}}"}]}}},
+        {"name":"Listar clientes","request":{"method":"GET","url":{"raw":"{{baseUrl}}/cliente","host":["{{baseUrl}}"],"path":["cliente"]}}}
+      ]
+    },
+    {
+      "name": "03 - Mecânico",
+      "item": [
+        {"name":"Criar mecânico","request":{"method":"POST","header":[{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","raw":"{\n  \"nome\": \"Carlos Mecânico\",\n  \"email\": \"carlos@email.com\",\n  \"especialidade\": \"Motor\"\n}"},"url":{"raw":"{{baseUrl}}/mecanico?idPlan={{planoId}}","host":["{{baseUrl}}"],"path":["mecanico"],"query":[{"key":"idPlan","value":"{{planoId}}"}]}}},
+        {"name":"Listar mecânicos","request":{"method":"GET","url":{"raw":"{{baseUrl}}/mecanico","host":["{{baseUrl}}"],"path":["mecanico"]}}}
+      ]
+    },
+    {
+      "name": "04 - Manual",
+      "item": [
+        {"name":"Criar manual","request":{"method":"POST","header":[{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","raw":"{\n  \"titulo\": \"Manual do Motor\",\n  \"descricao\": \"Procedimentos de manutenção do motor\"\n}"},"url":{"raw":"{{baseUrl}}/manual","host":["{{baseUrl}}"],"path":["manual"]}}},
+        {"name":"Listar manuais","request":{"method":"GET","url":{"raw":"{{baseUrl}}/manual","host":["{{baseUrl}}"],"path":["manual"]}}}
+      ]
+    },
+    {
+      "name": "05 - Diagnóstico",
+      "item": [
+        {"name":"Criar diagnóstico","request":{"method":"POST","header":[{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","raw":"{\n  \"descricao\": \"Ruído no motor\",\n  \"resultado\": \"Necessária revisão\",\n  \"idVeic\": 1\n}"},"url":{"raw":"{{baseUrl}}/diagnostico?idCliente={{clienteId}}&idManual={{manualId}}","host":["{{baseUrl}}"],"path":["diagnostico"],"query":[{"key":"idCliente","value":"{{clienteId}}"},{"key":"idManual","value":"{{manualId}}"}]}}},
+        {"name":"Listar diagnósticos","request":{"method":"GET","url":{"raw":"{{baseUrl}}/diagnostico","host":["{{baseUrl}}"],"path":["diagnostico"]}}}
+      ]
+    },
+    {
+      "name": "06 - Avaliação",
+      "item": [
+        {"name":"Criar avaliação","request":{"method":"POST","header":[{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","raw":"{\n  \"nota\": 5,\n  \"comentario\": \"Excelente atendimento\"\n}"},"url":{"raw":"{{baseUrl}}/avaliacao?clienteId={{clienteId}}&mecanicoId={{mecanicoId}}","host":["{{baseUrl}}"],"path":["avaliacao"],"query":[{"key":"clienteId","value":"{{clienteId}}"},{"key":"mecanicoId","value":"{{mecanicoId}}"}]}}},
+        {"name":"Listar avaliações","request":{"method":"GET","url":{"raw":"{{baseUrl}}/avaliacao","host":["{{baseUrl}}"],"path":["avaliacao"]}}}
+      ]
+    }
+  ]
+}
